@@ -33,7 +33,7 @@ module Spoom
       # Run a command in this context directory
       sig { params(command: String, capture_err: T::Boolean).returns(ExecResult) }
       def exec(command, capture_err: true)
-        Bundler.with_unbundled_env do
+        # Bundler.with_unbundled_env do
           opts = T.let({ chdir: absolute_path }, T::Hash[Symbol, T.untyped])
 
           if capture_err
@@ -43,7 +43,7 @@ module Spoom
             out, status = Open3.capture2(command, opts)
             ExecResult.new(out: out, err: nil, status: T.must(status.success?), exit_code: T.must(status.exitstatus))
           end
-        end
+        # end
       end
     end
   end
